@@ -1,7 +1,7 @@
 <template>
   <div class="select-unselect-field">
     <div class="available-options">
-      <h3>Available</h3>
+      <h3>Available ({{ availableOptions.length }})</h3>
       <ul>
         <li v-for="option in availableOptions" :key="option.id" @click="toggleOption(option)">
           {{ option.label }}
@@ -9,7 +9,7 @@
       </ul>
     </div>
     <div class="disabled-options">
-      <h3>Disabled</h3>
+      <h3>Disabled ({{ disabledOptions.length }})</h3>
       <ul>
         <li v-for="option in disabledOptions" :key="option.id" @click="toggleOption(option)">
           {{ option.label }}
@@ -50,66 +50,66 @@ export default {
   },
   methods: {
     initializeOptions() {
-      this.availableOptions = this.field.options.filter((option) => this.modelValue.includes(option.id));
-      this.disabledOptions = this.field.options.filter((option) => !this.modelValue.includes(option.id));
+      this.disabledOptions = this.field.options.filter((option) => this.modelValue.includes(option.id));
+      this.availableOptions = this.field.options.filter((option) => !this.modelValue.includes(option.id));
     },
     toggleOption(option) {
-      const isAvailable = this.availableOptions.some((o) => o.id === option.id);
-      if (isAvailable) {
-        this.availableOptions = this.availableOptions.filter((o) => o.id !== option.id);
-        this.disabledOptions.push(option);
-      } else {
+      const isDisabled = this.disabledOptions.some((o) => o.id === option.id);
+      if (isDisabled) {
         this.disabledOptions = this.disabledOptions.filter((o) => o.id !== option.id);
         this.availableOptions.push(option);
+      } else {
+        this.availableOptions = this.availableOptions.filter((o) => o.id !== option.id);
+        this.disabledOptions.push(option);
       }
       this.updateParent();
     },
     updateParent() {
-      const selectedIds = this.availableOptions.map((option) => option.id);
+      const selectedIds = this.disabledOptions.map((option) => option.id);
       this.$emit("update:modelValue", selectedIds);
     },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .select-unselect-field {
   display: flex;
   gap: 20px;
-}
 
-.available-options,
-.disabled-options {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  width: 50%;
-  /* Ajusta según tus necesidades */
-}
+  .available-options,
+  .disabled-options {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 275px;
 
-.available-options ul,
-.disabled-options ul {
-  list-style: none;
-  padding: 0;
-}
+    h3 {
+      color: white;
+      margin-bottom: 10px;
+    }
 
-.available-options li,
-.disabled-options li {
-  padding: 5px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
-.available-options li:hover {
-  background-color: #f0f0f0;
-}
+      li {
+        padding: 8px;
+        cursor: pointer;
+        border-bottom: 1px solid #444;
+        color: white;
+        transition: background-color 0.3s ease;
 
-.disabled-options li:hover {
-  background-color: #f0f0f0;
-}
+        &:hover {
+          background-color: #444;
+        }
 
-h3 {
-  margin-top: 0;
-  font-size: 1.2em;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
 }
 </style>

@@ -14,8 +14,10 @@
         <button type="submit" class="form-button">Guardar</button>
       </div>
     </form>
-    <label id="result-label">Result:</label><br />
-    <textarea id="result" rows="10" cols="50" disabled></textarea>
+    <div class="result-container">
+      <label for="result" id="result-label">Result</label>
+      <textarea id="result" rows="10" cols="50" disabled></textarea>
+    </div>
   </div>
 </template>
 
@@ -72,63 +74,86 @@ const getComponentName = (field) => {
 };
 </script>
 
-<style scoped>
-.form-group {
-  margin-bottom: 1rem;
-}
+<style lang="scss" scoped>
+.dynamic-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 
-.is-invalid {
-  border-color: red;
-}
+  .form-group {
+    width: 100%;
+  }
 
-label {
-  display: inline-block;
-  width: 100px;
-  margin-bottom: 10px;
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
 
-  &#result-label {
+  label {
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
     width: 100%;
     text-align: left;
   }
-}
-input, select, textarea {
-  padding: 5px;
-  width: 100%;
-  margin-bottom: 10px;
-}
 
-[disabled] {
-  cursor: not-allowed;
-}
-.button-container {
-  text-align: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-
-  button {
-    margin: auto;
+  input, select {
+    background-color: #000;
+    color: white;
+    border: 1px solid #333;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
   }
-}
-.form-field {
-  display: flex;
-  align-items: center;
-}
 
-.form-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
+  .button-container {
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
 
-.form-button:hover {
-  background-color: #3e8e41;
+    .form-button {
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #333;
+      }
+    }
+  }
+
+  .result-container {
+    width: 100%;
+    margin-top: 1rem;
+
+    #result-label {
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      text-align: left;
+    }
+
+    #result {
+      background-color: #666;
+      color: white;
+      border: 1px solid #333;
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 }
 </style>

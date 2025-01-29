@@ -44,17 +44,51 @@ const handleFormSubmit = (formData) => {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+html, body {
+  background-color: #222;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body > div, #app {
+  min-height: 100vh;
+}
+</style>
+
+<style lang="scss" scoped>
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+
+    &.vue {
+      filter: drop-shadow(0 0 2em #e3bd00aa);
+    }
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #e3bd00aa);
+
+button {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #333;
+  }
 }
 </style>

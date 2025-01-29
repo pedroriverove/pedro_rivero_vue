@@ -1,28 +1,39 @@
 <template>
-    <textarea 
-        :id="field.id" 
-        @change="handleChange"
-        :value="modelValue"
-    ></textarea>
+  <textarea
+      :id="field.id"
+      :value="modelValue"
+      @input="handleInput"
+  ></textarea>
 </template>
 
 <script setup>
-import fieldMixin from '../FieldMixin';
-const emit = defineEmits(['update']);
-const props = defineProps({
-    field: {
-        type: Object,
-        required: true,
-    },
-    modelValue: {
-        type: [String, Number, Boolean, Object, Array],
-        default: '',
-    },
-});
-let { handleChange } = fieldMixin.setup(props, { emit });
+import {defineEmits, defineProps} from 'vue';
 
+const emit = defineEmits(['update:modelValue']);
+const props = defineProps({
+  field: {
+    type: Object,
+    required: true,
+  },
+  modelValue: {
+    type: [String, Number, Boolean, Object, Array],
+    default: '',
+  },
+});
+
+const handleInput = (event) => {
+  const value = event.target.value;
+  emit('update:modelValue', value);
+};
 </script>
 
 <style scoped>
-/* Add your styles here */
+textarea {
+  background-color: #444 !important;
+  color: white;
+  border: 1px solid #333;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
 </style>

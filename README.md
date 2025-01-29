@@ -1,12 +1,12 @@
 # Vue
 
-## Install dependencies
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-## Run in development mode
+### Run in development mode
 
 ```bash
 npm run dev

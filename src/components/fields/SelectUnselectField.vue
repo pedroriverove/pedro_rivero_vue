@@ -73,7 +73,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos (sin cambios) */
 .select-unselect-field {
   display: flex;
   gap: 20px;

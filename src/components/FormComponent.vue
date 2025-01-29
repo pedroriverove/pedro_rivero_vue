@@ -11,7 +11,7 @@
         />
       </div>
       <div class="button-container">
-        <button type="submit" class="button primary">Guardar</button>
+        <button type="submit" class="form-button">Guardar</button>
       </div>
     </form>
     <label id="result-label">Result:</label><br />
@@ -73,7 +73,6 @@ const getComponentName = (field) => {
 </script>
 
 <style scoped>
-/* Estilos (sin cambios) */
 .form-group {
   margin-bottom: 1rem;
 }
@@ -104,6 +103,7 @@ input, select, textarea {
 .button-container {
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 20px;
 
   button {
     margin: auto;
@@ -112,5 +112,23 @@ input, select, textarea {
 .form-field {
   display: flex;
   align-items: center;
+}
+
+.form-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form-button:hover {
+  background-color: #3e8e41;
 }
 </style>

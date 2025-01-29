@@ -1,44 +1,49 @@
-
 <template>
   <div>
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/micasino.png" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <FormComponent :fieldDefinitions=fieldDefinitions />
+  <FormComponent :fieldDefinitions="fieldDefinitions" @formSubmit="handleFormSubmit" />
 </template>
+
 <script setup lang="ts">
 import FormComponent from './components/FormComponent.vue';
 
-let fieldDefinitions = [
+const fieldDefinitions = [
   {
     id: 'name',
     label: 'Nombre',
     type: 'Text',
     required: true,
   },
-  /* {
+  {
     id: 'options',
     label: 'Options',
-      type: 'SelectUnselect',
-      options: [
-        {
-          id: '1',
-          label: 'Option 1',
-        },
-        {
-          id: '2',
-          label: 'Option 2',
-        },
-        {
-          id: '3',
-          label: 'Option 3',
-        },
-      ],
+    type: 'SelectUnselect',
+    options: [
+      {
+        id: '1',
+        label: 'Option 1',
+      },
+      {
+        id: '2',
+        label: 'Option 2',
+      },
+      {
+        id: '3',
+        label: 'Option 3',
+      },
+    ],
     required: true,
-  } */
+  }
 ];
+
+const handleFormSubmit = (formData) => {
+  console.log('Datos del formulario:', formData);
+};
 </script>
+
 <style scoped>
 .logo {
   height: 6em;

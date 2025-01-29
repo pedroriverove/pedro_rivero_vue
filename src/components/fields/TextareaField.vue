@@ -7,8 +7,6 @@
 </template>
 
 <script setup>
-import {defineEmits, defineProps} from 'vue';
-
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   field: {

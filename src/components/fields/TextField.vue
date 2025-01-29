@@ -9,8 +9,6 @@
 </template>
 
 <script setup>
-import { defineEmits, defineProps } from 'vue';
-
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   field: {
@@ -25,14 +23,13 @@ const props = defineProps({
 
 const handleInput = (event) => {
   const value = event.target.value;
-  emit('update:modelValue', value); // Emitir el valor actualizado
+  emit('update:modelValue', value);
 };
 </script>
 
 <style scoped>
 input {
   background: black;
-  border-width: 1px;
   padding: 10px;
   color: white;
   border: 1px solid #333;

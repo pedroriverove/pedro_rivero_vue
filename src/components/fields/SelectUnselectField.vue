@@ -19,57 +19,54 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    field: {
-      type: Object,
-      required: true,
-    },
-    modelValue: {
-      type: Array,
-      default: () => [],
-    },
+<script setup>
+import { ref, watch, onMounted } from 'vue';
+
+const props = defineProps({
+  field: {
+    type: Object,
+    required: true,
   },
-  data() {
-    return {
-      availableOptions: [],
-      disabledOptions: [],
-    };
+  modelValue: {
+    type: Array,
+    default: () => [],
   },
-  mounted() {
-    this.initializeOptions();
-  },
-  watch: {
-    modelValue: {
-      handler() {
-        this.initializeOptions();
-      },
-      deep: true
-    }
-  },
-  methods: {
-    initializeOptions() {
-      this.disabledOptions = this.field.options.filter((option) => this.modelValue.includes(option.id));
-      this.availableOptions = this.field.options.filter((option) => !this.modelValue.includes(option.id));
-    },
-    toggleOption(option) {
-      const isDisabled = this.disabledOptions.some((o) => o.id === option.id);
-      if (isDisabled) {
-        this.disabledOptions = this.disabledOptions.filter((o) => o.id !== option.id);
-        this.availableOptions.push(option);
-      } else {
-        this.availableOptions = this.availableOptions.filter((o) => o.id !== option.id);
-        this.disabledOptions.push(option);
-      }
-      this.updateParent();
-    },
-    updateParent() {
-      const selectedIds = this.disabledOptions.map((option) => option.id);
-      this.$emit("update:modelValue", selectedIds);
-    },
-  },
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const availableOptions = ref([]);
+const disabledOptions = ref([]);
+
+const initializeOptions = () => {
+  disabledOptions.value = props.field.options.filter((option) => props.modelValue.includes(option.id));
+  availableOptions.value = props.field.options.filter((option) => !props.modelValue.includes(option.id));
 };
+
+const toggleOption = (option) => {
+  const isDisabled = disabledOptions.value.some((o) => o.id === option.id);
+  if (isDisabled) {
+    disabledOptions.value = disabledOptions.value.filter((o) => o.id !== option.id);
+    availableOptions.value.push(option);
+  } else {
+    availableOptions.value = availableOptions.value.filter((o) => o.id !== option.id);
+    disabledOptions.value.push(option);
+  }
+  updateParent();
+};
+
+const updateParent = () => {
+  const selectedIds = disabledOptions.value.map((option) => option.id);
+  emit('update:modelValue', selectedIds);
+};
+
+onMounted(() => {
+  initializeOptions();
+});
+
+watch(() => props.modelValue, () => {
+  initializeOptions();
+}, { deep: true });
 </script>
 
 <style lang="scss" scoped>

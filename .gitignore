@@ -1,34 +1,24 @@
-
-/.phpunit.cache
+# Dependency directories
 /node_modules
-/api-requests-server/node_modules
-/public/build
-/public/hot
+
+# Build and static files
+/dist
 /coverage
-/public/vendor/scribe
-/public/storage
-/storage/*.key
-/resources/views/email/mjml
-/vendor
-.env
-.env.backup
-.env.production
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
+
+# IDE files
 /.idea
-docker-compose.override.yml
+.idea/workspace.xml
 
+# Package management
+package-lock.json
+npm-debug.log
 
-/.*/
-/.buildpath
-/.project
-!/.github
-!.vscode/launch.example.json
-.rr.yaml
+# TypeScript
+*.tsbuildinfo
 
-/docs
+# Development and build tools
+.eslintcache
+
+# Misc
+.DS_Store
+Thumbs.db

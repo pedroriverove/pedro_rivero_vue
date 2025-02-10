@@ -1,14 +1,11 @@
 <template>
-  <textarea
-      :id="field.id"
-      :value="modelValue"
-      @input="handleInput"
-  ></textarea>
+  <textarea :id="field.id" :value="modelValue" @input="handleInput"></textarea>
 </template>
 
 <script setup>
-const emit = defineEmits(['update:modelValue']);
-const props = defineProps({
+const emit = defineEmits(['update:modelValue'])
+
+defineProps({
   field: {
     type: Object,
     required: true,
@@ -17,12 +14,12 @@ const props = defineProps({
     type: [String, Number, Boolean, Object, Array],
     default: '',
   },
-});
+})
 
 const handleInput = (event) => {
-  const value = event.target.value;
-  emit('update:modelValue', value);
-};
+  const value = event.target.value
+  emit('update:modelValue', value)
+}
 </script>
 
 <style scoped>

@@ -1,16 +1,17 @@
 <template>
   <input
-      :type="field.type || 'text'"
-      :name="field.id"
-      :disabled="field.disabled ?? null"
-      :value="modelValue"
-      @input="handleInput"
+    :type="field.type || 'text'"
+    :name="field.id"
+    :disabled="field.disabled ?? null"
+    :value="modelValue"
+    @input="handleInput"
   />
 </template>
 
 <script setup>
-const emit = defineEmits(['update:modelValue']);
-const props = defineProps({
+const emit = defineEmits(['update:modelValue'])
+
+defineProps({
   field: {
     type: Object,
     required: true,
@@ -19,12 +20,12 @@ const props = defineProps({
     type: [String, Number, Boolean, Object, Array],
     default: '',
   },
-});
+})
 
 const handleInput = (event) => {
-  const value = event.target.value;
-  emit('update:modelValue', value);
-};
+  const value = event.target.value
+  emit('update:modelValue', value)
+}
 </script>
 
 <style scoped>

@@ -3,7 +3,11 @@
     <div class="available-options">
       <h3>Available ({{ availableOptions.length }})</h3>
       <ul>
-        <li v-for="option in availableOptions" :key="option.id" @click="toggleOption(option)">
+        <li
+          v-for="option in availableOptions"
+          :key="option.id"
+          @click="toggleOption(option)"
+        >
           {{ option.label }}
         </li>
       </ul>
@@ -11,7 +15,11 @@
     <div class="disabled-options">
       <h3>Disabled ({{ disabledOptions.length }})</h3>
       <ul>
-        <li v-for="option in disabledOptions" :key="option.id" @click="toggleOption(option)">
+        <li
+          v-for="option in disabledOptions"
+          :key="option.id"
+          @click="toggleOption(option)"
+        >
           {{ option.label }}
         </li>
       </ul>
@@ -20,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue'
 
 const props = defineProps({
   field: {
@@ -31,42 +39,54 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
-const availableOptions = ref([]);
-const disabledOptions = ref([]);
+const availableOptions = ref([])
+const disabledOptions = ref([])
 
 const initializeOptions = () => {
-  disabledOptions.value = props.field.options.filter((option) => props.modelValue.includes(option.id));
-  availableOptions.value = props.field.options.filter((option) => !props.modelValue.includes(option.id));
-};
+  disabledOptions.value = props.field.options.filter((option) =>
+    props.modelValue.includes(option.id),
+  )
+  availableOptions.value = props.field.options.filter(
+    (option) => !props.modelValue.includes(option.id),
+  )
+}
 
 const toggleOption = (option) => {
-  const isDisabled = disabledOptions.value.some((o) => o.id === option.id);
+  const isDisabled = disabledOptions.value.some((o) => o.id === option.id)
   if (isDisabled) {
-    disabledOptions.value = disabledOptions.value.filter((o) => o.id !== option.id);
-    availableOptions.value.push(option);
+    disabledOptions.value = disabledOptions.value.filter(
+      (o) => o.id !== option.id,
+    )
+    availableOptions.value.push(option)
   } else {
-    availableOptions.value = availableOptions.value.filter((o) => o.id !== option.id);
-    disabledOptions.value.push(option);
+    availableOptions.value = availableOptions.value.filter(
+      (o) => o.id !== option.id,
+    )
+    disabledOptions.value.push(option)
   }
-  updateParent();
-};
+  updateParent()
+}
 
 const updateParent = () => {
-  const selectedIds = disabledOptions.value.map((option) => option.id);
-  emit('update:modelValue', selectedIds);
-};
+  const selectedIds = disabledOptions.value.map((option) => option.id)
+  emit('update:modelValue', selectedIds)
+}
 
 onMounted(() => {
-  initializeOptions();
-});
+  initializeOptions()
+})
 
-watch(() => props.modelValue, () => {
-  initializeOptions();
-}, { deep: true });
+watch(
+  () => props.modelValue,
+  () => {
+    initializeOptions()
+  },
+  { deep: true },
+)
 </script>
 
 <style lang="scss" scoped>

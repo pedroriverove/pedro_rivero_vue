@@ -2,7 +2,6 @@ import { toRaw } from 'vue';
 
 export default {
     setup(props, { emit }) {
-
         const handleChange = (event) => {
             let idAndValue = valueFromEvent(event, props.field.id);
             emit('update', idAndValue);
@@ -10,11 +9,9 @@ export default {
 
         const valueFromEvent = (event, currentId) => {
             let value;
-            let data;
 
-            // if event comes from an html element.
+            // if event comes from an HTML element.
             if (event.target) {
-
                 value = event.target.value;
                 // if checkbox
                 if (event.target.type === 'checkbox') {
@@ -34,14 +31,14 @@ export default {
                 id: currentId,
                 value: value,
             };
-
         };
 
-        let timerId;
+        let timerId = null;
+
         const debounce = (callback, wait) => {
             return (...args) => {
-                clearTimeout(timerId);
-                timerId = setTimeout(() => {
+                globalThis.clearTimeout(timerId);
+                timerId = globalThis.setTimeout(() => {
                     callback(...args);
                 }, wait);
             };
@@ -50,7 +47,7 @@ export default {
         return {
             handleChange,
             valueFromEvent,
-            debounce
+            debounce,
         };
     },
 };

@@ -4,11 +4,14 @@
       <img src="./assets/micasino.png" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <FormComponent :fieldDefinitions="fieldDefinitions" @formSubmit="handleFormSubmit" />
+  <FormComponent
+    :fieldDefinitions="fieldDefinitions"
+    @formSubmit="handleFormSubmit"
+  />
 </template>
 
 <script setup lang="ts">
-import FormComponent from './components/FormComponent.vue';
+import FormComponent from './components/FormComponent.vue'
 
 const fieldDefinitions = [
   {
@@ -36,23 +39,25 @@ const fieldDefinitions = [
       },
     ],
     required: true,
-  }
-];
+  },
+]
 
 const handleFormSubmit = (formData) => {
-  console.log('Datos del formulario:', formData);
-};
+  console.log('Datos del formulario:', formData)
+}
 </script>
 
 <style lang="scss">
-html, body {
+html,
+body {
   background-color: #222;
   margin: 0;
   padding: 0;
   min-height: 100vh;
 }
 
-body > div, #app {
+body > div,
+#app {
   min-height: 100vh;
 }
 </style>
